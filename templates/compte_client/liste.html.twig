@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+  {% block title %}liste compte client!{% endblock %}
+ {% block body %}
+
+        <div class="container">  
+            <h1>liste de tous les Comptes</h1>
+          <div classe="tab" class="tab">
+          {#   {{if isset($listeCompte)}}
+            {{if $listeCompte != null}} #}
+            <table id="listecompte">
+            <thead>
+              <tr>
+                
+                    <th>id Compte</th>
+                    <th>Numero</th>
+                    <th>Agence</th>
+                    <th>cléRib</th>
+                    <th>Date Ouverture</th>
+                    <th>Solde</th>
+                    <th>Type de compte</th>           
+                    <th>Frais</th>
+                    <th>Propriétaire</th>
+              </tr>
+            </thead>
+             <tbody>
+                {% for compte in comptes %}
+                      <tr>
+                          <td>{{compte.id}}</td>
+                          <td>{{compte.numero}}
+                          <td>dkr</td>
+                          <td>{{compte.cleRib}}</td>
+                          <td>{{compte.date|date('Y-m-d')}}</td>
+                          <td>{{compte.solde}}</td>
+                          <td>{{compte.typeCompte.libelle}}</td>
+                          <td>{{compte.frais}}</td>
+                          <td>{{compte.proprietaire.email}}</td>
+                      </tr>
+                {% endfor %}
+             </tbody>
+
+            </table>
+
+  
+    </div>
+  </div>
+     
+{% endblock %}
