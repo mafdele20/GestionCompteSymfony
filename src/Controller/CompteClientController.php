@@ -9,7 +9,7 @@ use App\Entity\Client;
 use App\Entity\TypeClient;
 use App\Entity\TypeCompte;
 use App\Entity\Etat;
-
+use Symfony\Component\BrowserKit\Request;
 
 class CompteClientController extends AbstractController
 {
@@ -31,7 +31,7 @@ class CompteClientController extends AbstractController
      /** 
      * @Route("saveCompteClient", name="saveCC")
      */
-    public function save()
+    public function save(Request $request)
     {
         $db = $this->getDoctrine()->getManager();
 

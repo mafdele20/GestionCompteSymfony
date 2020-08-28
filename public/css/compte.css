@@ -136,6 +136,8 @@ input[type=submit] {
   margin-top: 5%;
   float: right;
   margin-left: 10px;
+  transition: 0.2s;
+  
 }
 input[type=reset] {
   background-color: gray;
@@ -147,6 +149,7 @@ input[type=reset] {
   margin-top: 5%;
   float: right;
   width: 100px;
+ transition: 0.2s;
 }
 input[type=button] {
   background-color: gray;

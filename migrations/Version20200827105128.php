@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200813104202 extends AbstractMigration
+final class Version20200827105128 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,16 +20,16 @@ final class Version20200813104202 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE client DROP FOREIGN KEY FK_C74404555D7C53EC');
-        $this->addSql('DROP INDEX IDX_C74404555D7C53EC ON client');
-        $this->addSql('ALTER TABLE client DROP employeur_id');
+        $this->addSql('ALTER TABLE operation ADD compte_id INT NOT NULL');
+        $this->addSql('ALTER TABLE operation ADD CONSTRAINT FK_1981A66DF2C56620 FOREIGN KEY (compte_id) REFERENCES compte (id)');
+        $this->addSql('CREATE INDEX IDX_1981A66DF2C56620 ON operation (compte_id)');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE client ADD employeur_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE client ADD CONSTRAINT FK_C74404555D7C53EC FOREIGN KEY (employeur_id) REFERENCES employeur (id)');
-        $this->addSql('CREATE INDEX IDX_C74404555D7C53EC ON client (employeur_id)');
+        $this->addSql('ALTER TABLE operation DROP FOREIGN KEY FK_1981A66DF2C56620');
+        $this->addSql('DROP INDEX IDX_1981A66DF2C56620 ON operation');
+        $this->addSql('ALTER TABLE operation DROP compte_id');
     }
 }

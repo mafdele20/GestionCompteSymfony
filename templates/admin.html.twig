@@ -8,7 +8,7 @@
          
           {% block stylesheets %}
 
-          <link rel="stylesheet" href="{{asset('/css/compte.css')}}"> 
+          <link rel="stylesheet" href="{{asset('/css/admin.css')}}"> 
 
           {% endblock %}
     </head>
@@ -33,21 +33,20 @@
                 </div>
                 </div>
             </nav>
-
-        <div class="corps">
-    
+      <div class="corps">
         <div class="sliderBar">
                 <div class="espace">
 
                 </div>
                 <div class="action">
-                   <div class="slb-blanc"><a href="{{path('employeur')}}">Ajouter Employeur</a></div>
+                    <div class="slb-blanc"><a href="{{path('employeur')}}">Ajouter Employeur</a></div>
                     <div class="slb-degrade"><a href="{{path('salarie')}}">Ajouter Client Salarie</a></div>
                     <div class="slb-blanc"><a href="{{path('entreprise')}}">Ajouter Client Entreprise</a></div>
                     <div class="slb-degrade"><a href="{{path('nonsalarie')}}">Ajouter Client Non Salarie</a></div>
                     <div class="slb-blanc"><a href="{{path('addtypecompte')}}"> Ajouter Type de Compte </a></div>
                     <div class="slb-degrade"><a href="{{path('addtypeclient')}}">Ajouter Type de Client</a></div>
                     <div class="slb-blanc"><a href="{{path('addetat')}}">Ajouter Etat</a></div>
+                    <div class="slb-degrade"><a href="">Creer Utilisateur</a></div>
                 </div>
                 
             </div>

@@ -119,6 +119,10 @@ class Employeur
     }
 
     
+    public function __toString()
+    {
+        return $this->nomEmployeur;
+    }
 
    
   

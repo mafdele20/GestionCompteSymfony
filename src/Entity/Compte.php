@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Entity;
-
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\CompteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CompteRepository::class)
+ *  @ApiResource(
+ * normalizationContext={"groups"={"read:read"}},
+ * collectionOperations={"get"},
+ * itemOperations={"get"})
+ * @ApiFilter(SearchFilter::class, properties={"numero": "exact"})
  */
 class Compte
 {
@@ -16,6 +24,7 @@ class Compte
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read:read"})
      */
     private $id;
 
@@ -26,16 +35,19 @@ class Compte
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"read:read"})
      */
     private $date;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read:read"})
      */
     private $numero;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=0)
+     * @Groups({"read:read"})
      */
     private $solde;
 
@@ -47,6 +59,7 @@ class Compte
     /**
      * @ORM\ManyToOne(targetEntity=TypeCompte::class, inversedBy="comptes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read:read"})
      */
     private $typeCompte;
 
@@ -61,9 +74,18 @@ class Compte
      */
     private $etats;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Operation::class, mappedBy="compte")
+     * @Groups({"read:read"})
+     */
+    private $operations;
+
+
+
     public function __construct()
     {
         $this->etats = new ArrayCollection();
+        $this->operations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,4 +202,40 @@ class Compte
 
         return $this;
     }
+
+    /**
+     * @return Collection|Operation[]
+     */
+    public function getOperations(): Collection
+    {
+        return $this->operations;
+    }
+
+    public function addOperation(Operation $operation): self
+    {
+        if (!$this->operations->contains($operation)) {
+            $this->operations[] = $operation;
+            $operation->setCompte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOperation(Operation $operation): self
+    {
+        if ($this->operations->contains($operation)) {
+            $this->operations->removeElement($operation);
+            // set the owning side to null (unless already changed)
+            if ($operation->getCompte() === $this) {
+                $operation->setCompte(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+   
+ 
 }
