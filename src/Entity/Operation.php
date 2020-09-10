@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * normalizationContext={"groups"={"read:read"}},
  * collectionOperations={"get"},
  * itemOperations={"get"})
+ * @ApiFilter(SearchFilter::class, properties={"compte.numero": "exact"})
  */
 class Operation
 {
